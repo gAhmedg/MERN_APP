@@ -31,11 +31,10 @@ else
 fi
 
 # Run containers
-pwd
-ls
+
 echo "Running containers..."
 make start
-
+ 
 # Check if the container is running
 if [ $? -eq 0 ]; then
     echo "Docker container is running successfully!"
