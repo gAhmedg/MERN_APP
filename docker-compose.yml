@@ -8,6 +8,8 @@ services:
       - "3000:3000"
     networks:
       - my-network
+    depends_on:
+      - api-server
     
   api-server:
     image: api-server
