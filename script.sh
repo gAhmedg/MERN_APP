@@ -31,6 +31,8 @@ else
 fi
 
 # Run containers
+pwd
+ls
 echo "Running containers..."
 make start
 
