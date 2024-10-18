@@ -6,6 +6,8 @@ services:
     stdin_open: true
     ports: 
       - "3000:3000"
+    networks:
+      - my-network
     
   api-server:
     image: api-server
@@ -14,6 +16,8 @@ services:
       - "5000:5000"
     depends_on:
       - mongo
+    networks:
+      - my-network
   mongo:
     image: mongo:3.6.19-xenial
     container_name: mongo
@@ -21,7 +25,19 @@ services:
       - "27017:27017"
     volumes:
       - mongo-data:/data/db
+    networks:
+      - my-network
+  # mongo:
+  #   image: mongo:3.6.19-xenial
+  #   container_name: mongo
+  #   ports:
+  #     - "27017:27017"
+  #   volumes:
+  #     - mongo-data:/data/db
 
 volumes:
   mongo-data:
     driver: local
+networks:
+  my-network:
+    driver: bridge
