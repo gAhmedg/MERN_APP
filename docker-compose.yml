@@ -1,50 +1,31 @@
 version: "3"
 services:
   react-app:
-    build:
-      context: ./client
-      dockerfile: Dockerfile
-    # container_name: react-app
+    image: react-app
     stdin_open: true
     ports: 
       - "3000:3000"
     networks:
-      - my-network
-    # depends_on:
-    #   - api-server
-    
+      - mern-app
   api-server:
-    build:
-      context: ./server
-      dockerfile: Dockerfile
-      
-    # container_name: api-server
+    image: api-server
     ports:
       - "5000:5000"
-    # depends_on:
-    #   - mongo
     networks:
-      - my-network
-  # mongo:
-  #   image: mongo:3.6.19-xenial         # mongo:7.0.12
-  #   container_name: mongo
-  #   ports:
-  #     - "27017:27017"
-  #   volumes:
-  #     - mongo_data:/data/db
-  #   networks:
-  #     - my-network
-  # mongo:
-  #   image: mongo:3.6.19-xenial
-  #   container_name: mongo
-  #   ports:
-  #     - "27017:27017"
-  #   volumes:
-  #     - mongo-data:/data/db
-
-# volumes:
-#   mongo_data:
-    
+      - mern-app
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo:3.6.19-xenial
+    ports:
+      - "27017:27017"
+    networks:
+      - mern-app
+    volumes:
+      - mongo-data:/data/db
 networks:
-  my-network:
+  mern-app:
     driver: bridge
+volumes:
+  mongo-data:
+    driver: local
