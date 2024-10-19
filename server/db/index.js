@@ -1,7 +1,7 @@
 // const mongoose = require('mongoose');
 const mongoose = require('mongoose');
 
-const connectionString = 'mongodb://mongo:27017/movie';
+const connectionString = 'mongodb://mongo:27017/cinema';
 
 mongoose.connect(connectionString, {
   useNewUrlParser: true,
