@@ -1,7 +1,9 @@
 version: "3"
 services:
   react-app:
-    image: react-app
+    build:
+      context: ./client
+      dockerfile: Dockerfile
     # container_name: react-app
     stdin_open: true
     ports: 
@@ -12,7 +14,10 @@ services:
       - api-server
     
   api-server:
-    image: api-server
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+      
     # container_name: api-server
     ports:
       - "5000:5000"
@@ -21,12 +26,12 @@ services:
     networks:
       - my-network
   mongo:
-    image: mongo:3.6.19-xenial
+    image: mongo:7.0.12           # mongo:3.6.19-xenial
     container_name: mongo
     ports:
       - "27017:27017"
     volumes:
-      - mongo-data:/data/db
+      - mongo_data:/data/db
     networks:
       - my-network
   # mongo:
@@ -39,7 +44,7 @@ services:
 
 volumes:
   mongo-data:
-    driver: local
+    
 networks:
   my-network:
     driver: bridge
