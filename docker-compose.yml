@@ -10,8 +10,8 @@ services:
       - "3000:3000"
     networks:
       - my-network
-    depends_on:
-      - api-server
+    # depends_on:
+    #   - api-server
     
   api-server:
     build:
@@ -21,19 +21,19 @@ services:
     # container_name: api-server
     ports:
       - "5000:5000"
-    depends_on:
-      - mongo
+    # depends_on:
+    #   - mongo
     networks:
       - my-network
-  mongo:
-    image: mongo:3.6.19-xenial         # mongo:7.0.12
-    container_name: mongo
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongo_data:/data/db
-    networks:
-      - my-network
+  # mongo:
+  #   image: mongo:3.6.19-xenial         # mongo:7.0.12
+  #   container_name: mongo
+  #   ports:
+  #     - "27017:27017"
+  #   volumes:
+  #     - mongo_data:/data/db
+  #   networks:
+  #     - my-network
   # mongo:
   #   image: mongo:3.6.19-xenial
   #   container_name: mongo
@@ -42,8 +42,8 @@ services:
   #   volumes:
   #     - mongo-data:/data/db
 
-volumes:
-  mongo_data:
+# volumes:
+#   mongo_data:
     
 networks:
   my-network:
